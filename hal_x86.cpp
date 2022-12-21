@@ -1,4 +1,4 @@
-
+//hal_x86-Mock simulator of HAL/driver functions of underlying hardware-Replace with actual HAL functions after testing on x86
 //#include "pch.h"
 #include "hal_x86.h"
 #include <iostream>
@@ -34,16 +34,16 @@ void  hvac_hal :: sleepcp(int milliseconds) // Cross-platform sleep function
 #endif // _WIN32
 }
 
-int hvac_hal::readSensor(float *temp)
+int hvac_hal::readSensor(float& temp)
 
 {
 	
 	//std::vector<float> fakeval{ -FLT_MAX ,-300.0f,-200.1f, -180.9f,-45.7f,-30.1f,-7.0f,-4.5f,-0.1f,0.0f,0.02f,44.5f,63.2f,400.0f,FLT_MAX };
 	//static auto it = mocktemp.begin();
-	cout << "&&&&&&&&&&&&Readsesnsor&&&&&&&&&&&&"; cout << endl;
+	if (mocktemp.size() == 0)return 1;
 	for (auto i = mocktemp.begin(); i != mocktemp.end(); ++i)
 	{
-		*temp = *i;
+		temp = *i;
 		mocktemp.erase(i);
 		return 0;
 	}

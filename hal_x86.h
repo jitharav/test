@@ -12,7 +12,7 @@ private:
 public:
 	hvac_hal();
 	hvac_hal(vector<float>&  mtemp);
-	int readSensor(float* temp);
+	int readSensor(float& temp);
 	int setHeatingOn(const bool heat_on);
 	int setCoolingOn(const bool cool_on);
 	int setAcOn(const bool hw_on);

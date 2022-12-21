@@ -1,5 +1,4 @@
-// hvac.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// hvac.cpp : This file contains the interface functions implementation and various state classes.
 //#include "pch.h"
 #include "hvac.h"
 
@@ -7,13 +6,13 @@
 
 //CPP File
 
-int  HvacCtrl::readTempsensor(float* currtemp)
+int  HvacCtrl::readTempsensor(float& currtemp)
 {
 
     int nRet = mhvac_hw.readSensor(currtemp);
     return nRet;
 }
-int  HvacCtrl::monitorControl(int *mintrigger,int* maxtrigger)
+int  HvacCtrl::monitorControl(int& mintrigger,int& maxtrigger)
 {
     int  senret = 0;
     int min = 0;
@@ -23,10 +22,8 @@ int  HvacCtrl::monitorControl(int *mintrigger,int* maxtrigger)
     while (true == bMonitoring)
     {
         float currtemp = 0.0f;
-        senret = readTempsensor(&currtemp);
-        cout << senret;
-
-        cout << "***Current temperature is" << currtemp;
+        senret = readTempsensor(currtemp);
+       
 
         if (0 == senret)
         {
@@ -34,19 +31,19 @@ int  HvacCtrl::monitorControl(int *mintrigger,int* maxtrigger)
             if (currtemp < (mintemp + 3.0f))//within threshold
             {
                 ac_heating_on();
-                    min++;
-                    cout << " cutoff thermistor";
+                min++;
+                
             }
             else if (currtemp > (maxtemp-3.0f))
             {
                 ac_cooling_on();
-                    max++;
-                    //cooling on
-                    cout << " cooling on \n" << endl;
+                max++;
+                //cooling on
+               
             }
             else
             {
-                cout << " heating/cooling off \n" << endl;
+                
                 ac_heating_off();
                 ac_cooling_off();
             }//if
@@ -54,16 +51,15 @@ int  HvacCtrl::monitorControl(int *mintrigger,int* maxtrigger)
         }
         else
         {
-            cout << "End of dummy data"; cout << endl;
+           
             senret = HVAC_ESENSOR_FAIL;
             break;
         }//if
     }//while
-    cout << "min is"; cout << min; cout << endl;
-    cout << "max is"; cout << max; cout << endl;
-   *mintrigger = min;
-   *maxtrigger = max;
-   return senret;
+ 
+    mintrigger = min;
+    maxtrigger = max;
+    return senret;
 }
 int HvacCtrl::changeTemp(float mintemp, float maxtemp)
 {
@@ -73,11 +69,7 @@ int HvacCtrl::changeTemp(float mintemp, float maxtemp)
         this->maxtemp = maxtemp;
         this->mintemp = mintemp;
         mtx.unlock();
-        cout << "Min and Max temp";
-        cout << endl;
-        cout << maxtemp;
-        cout << mintemp;
-        cout << endl;
+       
         return HVAC_EOK;
     }
     else
@@ -146,8 +138,7 @@ int HvacCtrl::ac_off()
         nRet = mhvac_hw.setAcOn(false);
         Notify(mintemp, maxtemp);//state change notify
     }
-    cout << "AC OFF";
-    cout << endl;
+    
     return nRet;
 }
 
@@ -158,11 +149,11 @@ class hvac_on : public State
 public:
     hvac_on()
     {
-        cout << "   ON-ctor ";
+       
     };
     ~hvac_on()
     {
-        cout << "   dtor-ON\n";
+       
     };
     
     int ac_off(HvacCtrl* m);
@@ -175,16 +166,16 @@ class hvac_off : public State
 public:
     hvac_off()
     {
-        cout << " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%OFF-ctor ";
+        
     };
     ~hvac_off()
     {
-        cout << "   dtor-OFF\n";
+       
     };
    
     int ac_on(HvacCtrl* m)
     {
-        cout << "   going from OFF to ON";
+        
         m->setCurrent(new hvac_on());
         delete this;
         return HVAC_STATE_CHANGE;
@@ -193,7 +184,7 @@ public:
 };
 int hvac_on::ac_off(HvacCtrl* m)
 {
-    cout << "   going from ON to OFF";
+    
     m->setCurrent(new hvac_off());
     delete this;
     return HVAC_STATE_CHANGE;
@@ -204,11 +195,11 @@ class hvac_cooling_on : public State
 public:
     hvac_cooling_on()
     {
-        cout << "   Coling_on -ctor ";
+        
     };
     ~hvac_cooling_on()
     {
-        cout << "   dtor-cooling_on\n";
+        
     };
 
     int cooling_off(HvacCtrl* m)
@@ -231,11 +222,11 @@ class hvac_heating_on : public State
 public:
     hvac_heating_on()
     {
-        cout << "   Heating_on -ctor ";
+        
     };
     ~hvac_heating_on()
     {
-        cout << "   dtor-heating_on\n";
+       
     };
 
     int heatiing_off(HvacCtrl* m)
@@ -247,35 +238,6 @@ public:
 
 };
 
-/*
-
-int main()
-{
-   HvacCtrl daikin_ac;
-
-    // Two clients
-    client daikin_client1;
-    client daikin_client2;
-
-    daikin_ac.Attach(&daikin_client1);
-    daikin_ac.Attach(&daikin_client2);
-    hvac_hal hw_hal;
-    daikin_ac.init(hw_hal);
-    //Set AC min and max value
-    daikin_ac.ChangeTemp(330.0f,450.0f);
-    int mintrigger = 0;
-    int maxtrigger = 0;
-    daikin_ac.monitorControl(&mintrigger,&maxtrigger);
-
-    //client unsuscribe
-   // daikin_ac.Detach(&daikin_client2);
-    while (1);
-
-    //NSet another temperature
-    //daikin_ac.ChangeTemp(26.0f,46.0f);
-
-    return 0;
-}*/
 
 size_t  HvacCtrl::init(hvac_hal hvac_hal)
 {

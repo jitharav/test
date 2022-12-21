@@ -34,7 +34,7 @@ private:
     float mintemp = 40.0f;//default min temp limit
     float maxtemp =100.0f;//default max temp limit
     class hvac_hal    mhvac_hw;//HW Hal/Driver API -x86 or ARM
-    int  readTempsensor(float* currtemp);//Read temperature from hw sensor
+    int  readTempsensor(float& currtemp); // temperature from hw sensor
 
     int ac_cooling_on();
     int ac_heating_off();
@@ -45,7 +45,7 @@ public:
     size_t  init(hvac_hal mhvac_hw);
     void cleanup();
     int  changeTemp(float mintemp, float maxtemp);
-    int  monitorControl(int* mintrigger,int* maxtrigger);
+    int  monitorControl(int& mintrigger, int& maxtrigger);
     int  ac_on();
     int  ac_off();
     void setCurrent(State* s)

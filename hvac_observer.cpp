@@ -1,4 +1,4 @@
-//#include "pch.h"
+//hvac_observer.cpp-implementation of observer classes to get notification of state changes of ac
 #include "hvac.h"
 #include "hvac_observer.h"
 #include <iostream>
