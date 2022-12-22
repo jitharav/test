@@ -1,8 +1,10 @@
 # test project-Study project to monitor an ac.
 
-Implemented using various ststes and observer design concepts.
+Implemented using various states and observer design concepts.
+Major files/functions description
+--------------------------------------------------------------------------------------------
 
-hvac.h/hvac_interface.cpp-interface class that contains the public functions to monitor an ac
+hvac.h/hvac_interface.cpp-interface class that contains the public functions to monitor an ac.
   init-initialises the hardware.
   
   changeTemp-Set min and max temperature limits.
