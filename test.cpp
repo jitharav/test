@@ -1,7 +1,13 @@
 #include "gtest/gtest.h"
 #include "hvac_interface.h"
 
-
+int main(int argc, char** argv) {
+    char* option[] = { "test.exe", //it doesn't have meaning, just dummy
+                       "--gtest_output=xml:Hvac_gtest.xml" };
+    int argc1 = 2;
+    ::testing::InitGoogleTest(&argc1, option);
+    return RUN_ALL_TESTS();
+}
 HvacInterfaceTest::HvacInterfaceTest()
 {
 
@@ -210,7 +216,7 @@ TEST(HvacInterfaceTest, TCx0100Monitor_Normal) {
     //Set AC min and max value
     HvacCtrl daikin_ac;
     vector<float>  test;
-    for (int i = 0; i <= 1000; i++)
+    for (int i = 0; i <= 1000000; i++)
     {
         test.push_back((float)rand());
     }
