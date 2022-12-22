@@ -24,7 +24,7 @@ hvac_x86.h/hvac_x86.cpp Dummy HAL functions in x86.
 test.cpp-Google test case implemenation.
 
 
-CMakelists-will geerate visual studio projects for the file.
+CMakelists-will generate visual studio projects for the file.
 
 The gtest libraries(gtest.leb,gtest_main.lib) should be available in ${CMAKE_SOURCE_DIR}/lib") folder.
 
