@@ -1,8 +1,8 @@
 # test project-Study project to monitor an ac.
 
 Implemented using various states and observer design concepts.
-Major files/functions description
---------------------------------------------------------------------------------------------
+Major files/functions description are as below
+
 
 hvac.h/hvac_interface.cpp-interface class that contains the public functions to monitor an ac.
   init-initialises the hardware.
