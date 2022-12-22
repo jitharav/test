@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="15" failures="0" disabled="0" errors="0" timestamp="2022-12-22T12:54:56" time="0.333" name="AllTests">
+  <testsuite name="HvacInterfaceTest" tests="15" failures="0" disabled="0" errors="0" time="0.332">
+    <testcase name="TCx0100Monitor_Init_mock1" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0101Monitor_Init_mock2" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0101Monitor_Init_cleanup_mock2" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0102Monitor_Init_ac_on" status="run" time="0.104" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_on_off" status="run" time="0.217" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_change_temp" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_change_temp_out_of_bounds" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_change_max_limit" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_normal" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_normal_cooling_on" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_heating_cooling_off" status="run" time="0.001" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_alternate_heating_cooling" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_max_float_limit" status="run" time="0" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_huge_data" status="run" time="0.001" classname="HvacInterfaceTest" />
+    <testcase name="TCx0100Monitor_Normal" status="run" time="0.009" classname="HvacInterfaceTest" />
+  </testsuite>
+</testsuites>
