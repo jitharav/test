@@ -157,8 +157,9 @@ public:
     };
     
     int ac_off(HvacCtrl* m);
-    int cooling_on(HvacCtrl* m);
-    int heating_on(HvacCtrl* m);
+    int ac_cooling_on(HvacCtrl* m);
+    int ac_heating_on(HvacCtrl* m);
+
  };
 
 class hvac_off : public State
@@ -180,6 +181,23 @@ public:
         delete this;
         return HVAC_STATE_CHANGE;
     }
+    int ac_cooling_on(HvacCtrl* m)
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+    int ac_heating_on(HvacCtrl* m)
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+    int ac_cooling_off(HvacCtrl* m)
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+    int ac_heating_off(HvacCtrl* m)
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+
 
 };
 int hvac_on::ac_off(HvacCtrl* m)
@@ -201,22 +219,36 @@ public:
     {
         
     };
-
-    int cooling_off(HvacCtrl* m)
+    int ac_heating_on(HvacCtrl* m);
+    int ac_cooling_off(HvacCtrl* m)
     {
         m->setCurrent(new hvac_on());
        delete this;
        return HVAC_STATE_CHANGE;
      }
 
+
+  
+    int ac_heating_off(HvacCtrl* m)
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+    int ac_off(HvacCtrl* m)
+    {
+        m->setCurrent(new hvac_off());
+        delete this;
+        return HVAC_STATE_CHANGE;
+    }
+
 };
-int  hvac_on::cooling_on(HvacCtrl* m)
+int  hvac_on::ac_cooling_on(HvacCtrl* m)
 {
    m->setCurrent(new hvac_cooling_on());
    delete this;
    return HVAC_STATE_CHANGE;
    
 }
+
 class hvac_heating_on : public State
 {
 public:
@@ -229,15 +261,46 @@ public:
        
     };
 
-    int heatiing_off(HvacCtrl* m)
+    int ac_heatiing_off(HvacCtrl* m)
     {
         m->setCurrent(new hvac_on());
         delete this;
         return HVAC_STATE_CHANGE;
     }
 
-};
+    int ac_cooling_on(HvacCtrl* m)
+    {
+        m->setCurrent(new hvac_cooling_on());
+        delete this;
+        return HVAC_STATE_CHANGE;
+    }
 
+    int ac_cooling_off()
+    {
+        return HVAC_STATE_CHANGE_ERROR;
+    }
+    int ac_off(HvacCtrl* m)
+    {
+        m->setCurrent(new hvac_off());
+        delete this;
+        return HVAC_STATE_CHANGE;
+    }
+
+
+};
+int hvac_cooling_on::ac_heating_on(HvacCtrl* m)
+{
+    m->setCurrent(new hvac_heating_on());
+    delete this;
+    return HVAC_STATE_CHANGE;
+}
+int  hvac_on::ac_heating_on(HvacCtrl* m)
+{
+    m->setCurrent(new hvac_heating_on());
+    delete this;
+    return HVAC_STATE_CHANGE;
+
+}
 
 size_t  HvacCtrl::init(hvac_hal hvac_hal)
 {

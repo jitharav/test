@@ -130,9 +130,11 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_normal) {
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(20.0f, 30.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n= daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(2, n);
+    EXPECT_EQ(0, n);
     EXPECT_EQ(3, min);
     EXPECT_EQ(0, max);
 }
@@ -145,9 +147,11 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_normal_cooling_on) {
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(20.0f,30.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n = daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(HVAC_ESENSOR_FAIL, n);
+    EXPECT_EQ(0, n);
     EXPECT_EQ(0, min);
     EXPECT_EQ(2, max);
 }
@@ -159,9 +163,11 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_heating_cooling_off) {
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(17.0f, 35.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n = daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(HVAC_ESENSOR_FAIL, n);
+    EXPECT_EQ(0, n);
     EXPECT_EQ(0, min);
     EXPECT_EQ(0, max);
 }
@@ -173,9 +179,11 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_alternate_heating_cooling) {
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(17.0f, 35.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n = daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(HVAC_ESENSOR_FAIL, n);
+    EXPECT_EQ(0, n);
     EXPECT_EQ(5, min);
     EXPECT_EQ(5, max);
 }
@@ -187,9 +195,11 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_max_float_limit){
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(17.0f, 35.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n = daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(HVAC_ESENSOR_FAIL, n);
+    EXPECT_EQ(0, n);
     EXPECT_EQ(1, min);
     EXPECT_EQ(1, max);
 }
@@ -206,12 +216,34 @@ TEST(HvacInterfaceTest, TCx0103Monitor_monitor_temp_huge_data) {
     size_t n = daikin_ac.init(hw_hal);
     n = daikin_ac.changeTemp(17.0f, 35.0f);
     int min = 0; int max = 0;
+    n = daikin_ac.ac_on();
     n = daikin_ac.monitorControl(min, max);
+    n = daikin_ac.ac_off();
     daikin_ac.cleanup();
-    EXPECT_EQ(HVAC_ESENSOR_FAIL, n);
+    EXPECT_EQ(0, n);
    
 }
+TEST(HvacInterfaceTest, TCx0100Monitor_AC_ON_OFF_monitor) {
+    //Set AC min and max value
+    HvacCtrl daikin_ac;
+    vector<float>  test;
+    for (int i = 0; i <= 10000; i++)
+    {
+        test.push_back((float)rand());
+    }
+    hvac_hal hw_hal(test);
+    size_t n = daikin_ac.init(hw_hal);
+    int  nret = daikin_ac.ac_on();
+   
+    n = daikin_ac.changeTemp(17.0f, 35.0f);
+    int min = 0; int max = 0;
+    n = daikin_ac.monitorControl(min, max);
+    nret = daikin_ac.ac_off();
+    daikin_ac.cleanup();
+    EXPECT_EQ(0, nret);
 
+}
+#if 0
 TEST(HvacInterfaceTest, TCx0100Monitor_Normal) {
     //Set AC min and max value
     HvacCtrl daikin_ac;
@@ -230,4 +262,4 @@ TEST(HvacInterfaceTest, TCx0100Monitor_Normal) {
 
 }
 
-
+#endif

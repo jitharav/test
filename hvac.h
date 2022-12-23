@@ -11,6 +11,7 @@
 #define HVAC_STATE_CHANGE 3u
 #define HVAC_EFAIL 4u
 #define HVAC_EINVALID_PARAM 5u
+#define HVAC_STATE_CHANGE_ERROR 6u
 
 
 class Hvac
@@ -28,7 +29,7 @@ class HvacCtrl : public Hvac
 {
 
 private:
-    class State* current;//State of hardware
+    class State* current=NULL;//State of hardware
     bool bMonitoring = 0;//is ac monitoring on
     std::mutex mtx;//lock
     float mintemp = 40.0f;//default min temp limit
