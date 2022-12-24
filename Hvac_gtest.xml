@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="15" failures="0" disabled="0" errors="0" timestamp="2022-12-23T16:57:10" time="8.298" name="AllTests">
-  <testsuite name="HvacInterfaceTest" tests="15" failures="0" disabled="0" errors="0" time="8.294">
+<testsuites tests="20" failures="0" disabled="0" errors="0" timestamp="2022-12-24T17:22:02" time="60.404" name="AllTests">
+  <testsuite name="HvacInterfaceTest" tests="20" failures="0" disabled="0" errors="0" time="60.401">
     <testcase name="TCx0100Monitor_Init_mock1" status="run" time="0" classname="HvacInterfaceTest" />
-    <testcase name="TCx0101Monitor_Init_mock2" status="run" time="0.001" classname="HvacInterfaceTest" />
+    <testcase name="TCx0101Monitor_Init_mock2" status="run" time="0" classname="HvacInterfaceTest" />
     <testcase name="TCx0101Monitor_Init_cleanup_mock2" status="run" time="0" classname="HvacInterfaceTest" />
-    <testcase name="TCx0102Monitor_Init_ac_on" status="run" time="0.103" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_Init_ac_on_off" status="run" time="0.216" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_change_temp" status="run" time="0.003" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_change_temp_out_of_bounds" status="run" time="0.002" classname="HvacInterfaceTest" />
+    <testcase name="TCx0102Monitor_Init_ac_on" status="run" time="0.106" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_on_off" status="run" time="0.22" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_on_off_loop" status="run" time="21.902" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_on_loop" status="run" time="0.111" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_off_loop" status="run" time="0.01" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_Init_ac_init_on_off_cleanup_loop" status="run" time="21.631" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_change_temp" status="run" time="0.001" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_change_temp_out_of_bounds" status="run" time="0.001" classname="HvacInterfaceTest" />
     <testcase name="TCx0103Monitor_change_max_limit" status="run" time="0.001" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_normal" status="run" time="0.33" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_normal_cooling_on" status="run" time="0.325" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_heating_cooling_off" status="run" time="0.23" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_alternate_heating_cooling" status="run" time="1.298" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_max_float_limit" status="run" time="0.433" classname="HvacInterfaceTest" />
-    <testcase name="TCx0103Monitor_monitor_temp_huge_data" status="run" time="0.355" classname="HvacInterfaceTest" />
-    <testcase name="TCx0100Monitor_AC_ON_OFF_monitor" status="run" time="4.959" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_normal" status="run" time="0.317" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_normal_cooling_on" status="run" time="0.322" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_heating_cooling_off" status="run" time="0.228" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_alternate_heating_cooling" status="run" time="1.292" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_max_float_limit" status="run" time="0.427" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_huge_data" status="run" time="0.385" classname="HvacInterfaceTest" />
+    <testcase name="TCx0103Monitor_monitor_temp_huge_data_default_min_max_temp" status="run" time="7.633" classname="HvacInterfaceTest" />
+    <testcase name="TCx0100Monitor_AC_ON_OFF_monitor" status="run" time="5.762" classname="HvacInterfaceTest" />
   </testsuite>
 </testsuites>
