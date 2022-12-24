@@ -81,6 +81,7 @@ int HvacCtrl::changeTemp(float mintemp, float maxtemp)
 int HvacCtrl::ac_on()
 {
     int nRet = HVAC_EFAIL;
+
     if (HVAC_STATE_CHANGE == current->ac_on(this))
     {
         nRet=mhvac_hw.setAcOn(true);
